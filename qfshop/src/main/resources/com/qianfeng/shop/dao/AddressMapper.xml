@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.qianfeng.shop.dao.AddressDao">
+    <insert id="addAddress">
+        insert into tb_address
+            (detail,name,phone,uid,level)
+            values (#{detail},#{name},#{phone},#{uid},#{level})
+    </insert>
+    <update id="updateAddress"></update>
+    <delete id="deleteAddress">
+        delete from tb_address where uid=#{uid} and id=#{id}
+    </delete>
+    <!--
+我们的接口有两个参数,这边就不写参数类型了
+通过注解指定了参数的名字,就可以通过名字来获取参数
+如果参数是一个 map,唯一的要求:map 中的 key 的名字和下面需要的参数的名字保持一致即可
+id 方法名   resultType 方法返回值的全限定名
+-->
+
+    <select id="findAllAddresByUid" resultType="com.qianfeng.shop.pojo.TbAddress">
+        SELECT * from tb_address where  uid =#{uid}
+    </select>
+    <select id="findAddress" resultType="com.qianfeng.shop.pojo.TbAddress">
+        select * from tb_address where uid=#{uid} and id=#{id}
+    </select>
+</mapper>
